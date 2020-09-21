@@ -38,7 +38,7 @@ package shop.com.shaft;
                 {
                     int discount = (int) (0.2 * totalCost);
                     System.out.println("");
-                    System.out.println("20% off on total greater than $100");
+                    System.out.println("Discount Applied: 20% off on total greater than $100");
                     totalCost = totalCost - discount;
 
                 }
@@ -47,7 +47,7 @@ package shop.com.shaft;
                 {
                     int discount = (int) (0.15 * totalCost);
                     System.out.println("");
-                    System.out.println("15% off on total greater than $50");
+                    System.out.println("Discount Applied: 15% off on total greater than $50");
                     totalCost = totalCost - discount;
                 }
 
@@ -55,7 +55,7 @@ package shop.com.shaft;
                 {
                     int discount = (int) (0.1 * totalCost);
                     System.out.println("");
-                    System.out.println("10% off on total greater than $20");
+                    System.out.println("Discount Applied: 10% off on total greater than $20");
                     totalCost = totalCost - discount;
                 }
 
