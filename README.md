@@ -1,5 +1,5 @@
 # Crankshaft
-Crankshaft is an application to purchase your go-to products and gives you a smooth experience to add them to your shopping cart. The application provides the total cost of the products added to the shopping cart and discounts are applied when necessary.
+Crankshaft is an application to purchase your go-to products and gives you a smooth experience to add products to your shopping cart. The application provides the total cost of the products at checkout and discounts are applied when necessary.
 
 # Installation 
 
