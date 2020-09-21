@@ -1,115 +1,131 @@
 package shop.com.shaft;
+/**
+ * The class stores the products in a list and allows the user to add the products into the cart
+ */
 
+//import statements
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
-public class ProductList {
-    private ArrayList<Product> prodList = new ArrayList<Product>();
+public class ProductList
+{
+    private ArrayList < Product > productList = new ArrayList < Product > ();
     ShoppingCart cart = new ShoppingCart();
-    public void addToCart(){
-
+    //allows the user to add the products into the cart
+    public void addToCart()
+    {
         Scanner console = new Scanner(System.in);
-        int input = console.nextInt();
+        int input = -1;
+        try
+        {
+            input = console.nextInt();
+        }
+        catch (InputMismatchException e)
+        {
 
-        for (int i = 0; i < prodList.size(); i++) {
-
-            if (input -1 < prodList.size()) {
-                cart.addToCart(prodList.get(input-1));
-                System.out.println(prodList.get(input-1).getProductName() + " has been added to the cart");
+        }
+        //loops through the list of products in the array and adds the product according to the user input
+        for (int i = 0; i < productList.size(); i++)
+        {
+            if (input - 1 < productList.size() && input - 1 >= 0)
+            {
+                cart.addToCart(productList.get(input - 1));
+                System.out.println(productList.get(input - 1).getProductName() + " has been added to the cart");
                 break;
             }
-            else{
+            else
+                {
                 System.out.println("You have entered an invalid input");
                 break;
-            }
+                }
 
         }
     }
-
-
-    public void displayProducts() {
-
+    //displays the products which are read from the FileReaderJson class and allows the user to view product options
+    public void displayProducts()
+    {
         FileReaderJson file = new FileReaderJson();
 
         JSONArray products = file.readFile();
 
-       JSONArray JsonProductList = file.getArray();
+        JSONArray JsonProductList = file.getArray();
 
-       //adding to the product list
-
-        for(Object o: JsonProductList) {
+        //gets the product from the JSON file and ,stores them into the product objects and adds them to the list
+        for (Object o: JsonProductList)
+        {
             Product prod = new Product();
             JSONObject product = (JSONObject) o;
+
             prod.setProductId(Math.toIntExact((Long) product.get("uuid")));
 
             prod.setProductName((String) product.get("name"));
 
             prod.setPrice(Double.valueOf((String) product.get("price")));
 
-            prodList.add(prod);
+            productList.add(prod);
         }
-        System.out.println("Select an item to add to the cart");
 
+        System.out.println("");
+        System.out.println("Select the product number to add it to the cart");
+        //invoking the local method
         addToCart();
-       int index = 1;
-        System.out.println("select 1 to add another item or select 2 to checkout");
+
+        int index = 1;
+        System.out.println("");
+        System.out.println("Select 1 to view the list of products or select 2 to checkout or 3 to exit");
+
         boolean start = true;
-        while(index == 1 || start == true)
+        //displays products to the user continuously till an exit prompt is received, allows error handling and allows user to add products to cart
+        while ((index != 3 && index != 2) || start == true)
         {
-            if (start == false){
-                System.out.println("select 1 to add another item or select 2 to checkout");
+            if (start == false)
+            {
+                System.out.println("");
+                System.out.println("Select 1 to view the list of products or select 2 to checkout or 3 to exit");
             }
-           start = false;
+            start = false;
+
             Scanner add = new Scanner(System.in);
-
+            try
+            {
                 index = add.nextInt();
-                if(index == 1){
-                    for (int i = 1; i <= prodList.size();i++) {
-                        System.out.println(i+"." + " " + prodList.get(i-1).getProductName()+ "-" + prodList.get(i-1).getPrice());
-                    }
-                        System.out.println("Select an item to add to the cart");
+            }
+            catch (InputMismatchException e)
+            {
 
-          addToCart();
+            }
 
+            if (index != 1 && index != 2)
+            {
+                System.out.println("You have entered an invalid input");
+            }
 
-
-                    }
+            if (index == 1)
+            {
+                for (int i = 1; i <= productList.size(); i++)
+                {
+                    System.out.println(i + "." + " " + productList.get(i - 1).getProductName() + "-" + productList.get(i - 1).getPrice());
                 }
-        if(index == 2)
+                System.out.println("");
+                System.out.println("Select an item to add to the cart");
+                //invoking the local method
+                addToCart();
+            }
+
+        }
+
+        if (index == 2)
         {
-            cart.displayProdList();
+            cart.displayProductList();
         }
 
-        }
+    }
 
-
-
-
-    public ArrayList<Product> getProdList() {
-        return prodList;
+    public ArrayList < Product > getProductList()
+    {
+        return productList;
     }
 }
-    /*public void displayProducts() {
-        ArrayList<String> prodList = new ArrayList<String>();
-
-        FileReaderJson file = new FileReaderJson();
-        prodList = file.readFile();
-
-        int choice = 0;
-        while (true) {
-            System.out.println("Select the product name ");
-            Scanner input = new Scanner(System.in);
-            String name = input.next();
-
-           for (int i = 1; i < prodList.size(); i++) {
-                if (prodList.get(i).contains(name)) {
-                    System.out.println(i + "." + prodList.get(i) + "added to the cart");
-                }
-            }
-
-        }
-        }
-     */
