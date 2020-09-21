@@ -18,3 +18,7 @@ In the main directory run the command as follows: java -jar crankshaft.jar
 The Main.java class is the starting point to begin the shopping experience.
 On any IDE open the project and run the Main.java class.
 The simple command line interface will guide you through the entire process.
+
+# Dependencies
+
+The library used to read and parse the JSON file is: json-simple-1.1.1.jar 
