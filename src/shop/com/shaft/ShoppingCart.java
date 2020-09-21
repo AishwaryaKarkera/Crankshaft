@@ -1,6 +1,6 @@
 package shop.com.shaft;
 /**
- *
+ * The class provides the list of products in your cart with the total price and discounts applied at checkout.
  */
     //import statement
     import java.util.ArrayList;
